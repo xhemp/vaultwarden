@@ -95,17 +95,15 @@ jobs:
       # Determine Source Version
       - name: Determine Source Version
         run: |
-          echo "SOURCE_COMMIT=${SOURCE_COMMIT}"
-          git status --short --branch
-          git tag --points-at HEAD
           # Get the Source Version for this release
           GIT_EXACT_TAG="$(git describe --tags --abbrev=0 --exact-match 2>/dev/null || true)"
+
           if [[ -n "${GIT_EXACT_TAG}" ]]; then
-              echo "SOURCE_VERSION=${GIT_EXACT_TAG}" | tee -a "${GITHUB_ENV}"
-          else
-              GIT_LAST_TAG="$(git describe --tags --abbrev=0)"
-              echo "SOURCE_VERSION=${GIT_LAST_TAG}-${SOURCE_COMMIT:0:8}" | tee -a "${GITHUB_ENV}"
-          fi
+            echo "SOURCE_VERSION=${GIT_EXACT_TAG}" | tee -a "${GITHUB_ENV}"
+         else
+            GIT_LAST_TAG="$(git describe --tags --abbrev=0 2>/dev/null || echo "0.0.0")"
+            echo "SOURCE_VERSION=${GIT_LAST_TAG}-${SOURCE_COMMIT:0:8}" | tee -a "${GITHUB_ENV}"
+        fi
 
       # Login to Docker Hub
       - name: Login to Docker Hub
