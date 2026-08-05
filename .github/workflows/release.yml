@@ -95,6 +95,9 @@ jobs:
       # Determine Source Version
       - name: Determine Source Version
         run: |
+          echo "SOURCE_COMMIT=${SOURCE_COMMIT}"
+          git status --short --branch
+          git tag --points-at HEAD
           # Get the Source Version for this release
           GIT_EXACT_TAG="$(git describe --tags --abbrev=0 --exact-match 2>/dev/null || true)"
           if [[ -n "${GIT_EXACT_TAG}" ]]; then
