@@ -201,7 +201,7 @@ jobs:
             *.cache-from=${{ env.BAKE_CACHE_FROM }}
             *.cache-to=${{ env.BAKE_CACHE_TO }}
             *.platform=linux/${{ matrix.arch }}
-            ${{ env.TAGS }}
+            *.tags=vaultwarden/server:1.38.0-7d8c852c
             *.output=type=local,dest=./output
             *.output=type=image,push-by-digest=true,name-canonical=true,push=true
 
