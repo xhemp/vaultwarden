@@ -103,7 +103,7 @@ jobs:
          else
             GIT_LAST_TAG="$(git describe --tags --abbrev=0 2>/dev/null || echo "0.0.0")"
             echo "SOURCE_VERSION=${GIT_LAST_TAG}-${SOURCE_COMMIT:0:8}" | tee -a "${GITHUB_ENV}"
-        fi
+         fi
 
       # Login to Docker Hub
       - name: Login to Docker Hub
