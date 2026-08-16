@@ -197,13 +197,13 @@ jobs:
           source: .
           files: docker/docker-bake.hcl
           targets: "${{ matrix.base_image }}-multi"
-          set: |
-            *.cache-from=${{ env.BAKE_CACHE_FROM }}
-            *.cache-to=${{ env.BAKE_CACHE_TO }}
-            *.platform=linux/${{ matrix.arch }}
-            *.tags=vaultwarden/server:1.38.1-7d8c852c
-            *.output=type=local,dest=./output
-            *.output=type=image,push-by-digest=true,name-canonical=true,push=true
+        set: |
+          *.cache-from=${{ env.BAKE_CACHE_FROM }}
+          *.cache-to=${{ env.BAKE_CACHE_TO }}
+          *.platform=linux/${{ matrix.arch }}
+          *.tags=vaultwarden/server:1.38.1-7d8c852c
+          *.output=type=local,dest=./output
+          *.output=type=image,push-by-digest=true,name-canonical=true,push=true
 
       - name: Extract digest SHA
         env:
